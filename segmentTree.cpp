@@ -4,8 +4,11 @@
 
 using namespace std;
 
+
 template <class T>
 class SegmentTree{
+
+	// 0 index base segment tree with rang query point upate
 	
 	int arr_size;
 	
@@ -36,6 +39,20 @@ public:
 		// fun: funtion min, max, addition etc
 		// default_retrun: default return when argument false in queary function
 
+
+		/* 
+
+		SegmentTree seg(n, __min, INT_MAX);
+		
+		where __min is 
+
+		T __min(T a, T b){
+			return std::min(a, b);
+		}
+
+		*/
+
+
 		this -> arr_size = size_of_array;
 		seg.resize(4*arr_size + 5);
 
@@ -64,7 +81,6 @@ public:
 		seg[pos] = fun(seg[left(pos)], seg[right(pos)]);
 	}
 
-
 	T query(int l, int r){
 		return query(l, r, 0, arr_size-1, 0);
 	}
@@ -75,7 +91,7 @@ public:
 			return default_return;
 		}
 
-		if(l <= ql and qr <= r){
+		if(ql <= l and r <= qr){
 			return seg[pos];
 		}
 
@@ -83,9 +99,32 @@ public:
 		return fun(query(ql, qr, l, m, left(pos)), query(ql, qr, m+1, r, right(pos)));
 	}
 
+	void update(int loc, T value){
+		update(0, arr_size-1, loc, 0,value);
+	}
+
+	void update(int l, int r, int loc, int pos, T value){
+		if(l == r){
+			seg[pos] = value;
+			return; 
+		}
+
+		int m = mid(l, r);
+
+		if(loc <= m){
+			update(l, m, loc, left(pos), value);
+			seg[pos] = fun(seg[left(pos)], seg[right(pos)]);
+		}else{	
+			update(m+1, r, loc, right(pos), value);
+			seg[pos] = fun(seg[left(pos)], seg[right(pos)]);
+		}
+
+	}
+
+	void print(){
+		for(int i = 0; i < seg.size(); ++i)
+			cout << i  << " " << seg[i] << "\n";
+	}
+
 };
 
-int main(){
-
-	return 0;
-}
