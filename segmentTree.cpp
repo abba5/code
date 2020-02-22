@@ -49,6 +49,9 @@ public:
 		T __min(T a, T b){
 			return std::min(a, b);
 		}
+		
+		seg.build(arr);
+		arr is array -> you want to build tree
 
 		*/
 
@@ -127,4 +130,3 @@ public:
 	}
 
 };
-
