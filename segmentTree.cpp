@@ -42,7 +42,7 @@ public:
 
 		/* 
 
-		SegmentTree seg(n, __min, INT_MAX);
+		SegmentTree <int> seg(n, __min, INT_MAX);
 		
 		where __min is 
 
