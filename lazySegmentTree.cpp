@@ -11,6 +11,7 @@ class SegmentTree{
 	int arr_size;
 	
 	T default_return;
+	T deault_lazy;
 
 	std::vector<T> seg;
 	std::std::vector <T> update_seg; 
@@ -34,7 +35,7 @@ public:
 
 	SegmentTree(){}
 
-	SegmentTree(int size_of_array, std::function <T(T, T)> decide_fun, std::function <T(T, T)> update_fun, T default_return){
+	SegmentTree(int size_of_array, std::function <T(T, T)> decide_fun, std::function <T(T, T)> update_fun, T default_return, T deault_lazy){
 
 		// size_of_array: size of array on which want to build tree
 		// fun: funtion min, max, addition etc
@@ -65,6 +66,7 @@ public:
 		this -> update_fun = update_fun;
 		this -> decide_fun = decide_fun;
 		this -> default_return = default_return;
+		this -> deault_lazy = deault_lazy;
 	}
 
 	void build(std::vector<T> &a){
@@ -121,33 +123,44 @@ public:
 
 		if(lazy[pos]){
 			
-			seg[pos] = fun(seg[pos], update_seg[pos]);
-			lazy[pos] = 0;
+			seg[pos] = update_fun(seg[pos], update_seg[pos]);
 
 			if(l != r){
 				lazy[left(pos)] = 1;
 				lazy[right(pos)] = 1;
-				update_seg[left(pos)] = update_fun(update_seg[pos], value);
-				update_seg[right(pos)] = update_fun(update_seg[pos], value);
+				update_seg[left(pos)] = update_fun(update_seg[pos], update_seg[left(pos)]);
+				update_seg[right(pos)] = update_fun(update_seg[pos], update_seg[right(pos)]);
 			}
 
+			update_fun[pos] = deault_lazy;
+			lazy[pos] = 0;
+
 		}
 
-		if(l == r){
-			seg[pos] = value;
-			return; 
+
+		if(ul > r or ur < l)
+			return;
+
+		if(ul <= l and ur >= r){
+			seg[pos] = update_fun(seg[pos], value);
+			if(l != r){
+				lazy[l] = 1;
+				lazy[r] = 1;
+				update_seg[left(pos)] = update_fun(value, update_seg[left(pos)]);
+				update_seg[right(pos)] = update_fun(value, update_seg[right(pos)]);
+			}
+			return;		
 		}
+
 
 		int m = mid(l, r);
 
-		if(loc <= m){
-			update(l, m, loc, left(pos), value);
-			seg[pos] = fun(seg[left(pos)], seg[right(pos)]);
-		}else{	
-			update(m+1, r, loc, right(pos), value);
-			seg[pos] = fun(seg[left(pos)], seg[right(pos)]);
-		}
+		update(ul, ur, l, m, left(pos), value);
+		update(ul, ur, m+1, r, right(pos), value);
 
+		seg[pos] = decide_fun(seg[left(pos)], seg[right(pos)]);
+		return;
+		
 	}
 
 	void print(){
