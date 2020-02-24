@@ -15,7 +15,8 @@ class SegmentTree{
 	std::vector<T> seg;
 	std::std::vector <T> update_seg; 
 	std::bitset <int(1e6 + 5)> lazy;
-	std::function <T(T, T)> fun;
+	std::function <T(T, T)> decide_fun;
+	std::function <T(T, T)> update_fun;
 
 	inline int left(int pos){
 		return 2*pos + 1;
@@ -33,7 +34,7 @@ public:
 
 	SegmentTree(){}
 
-	SegmentTree(int size_of_array, std::function <T(T, T)> fun, T default_return){
+	SegmentTree(int size_of_array, std::function <T(T, T)> decide_fun, std::function <T(T, T)> update_fun, T default_return){
 
 		// size_of_array: size of array on which want to build tree
 		// fun: funtion min, max, addition etc
@@ -61,7 +62,8 @@ public:
 		update_seg.resize(4*arr_size + 5);
 		lazy.reset()
 
-		this -> fun = fun;
+		this -> update_fun = update_fun;
+		this -> decide_fun = decide_fun;
 		this -> default_return = default_return;
 	}
 
@@ -83,7 +85,7 @@ public:
 		build(a, l, m, left(pos));
 		build(a, m+1, r, right(pos));
 
-		seg[pos] = fun(seg[left(pos)], seg[right(pos)]);
+		seg[pos] = decide_fun(seg[left(pos)], seg[right(pos)]);
 	}
 
 	T query(int l, int r){
@@ -104,11 +106,33 @@ public:
 		return fun(query(ql, qr, l, m, left(pos)), query(ql, qr, m+1, r, right(pos)));
 	}
 
-	void update(int loc, T value){
-		update(0, arr_size-1, loc, 0,value);
+	void update(int l, int r, int value){
+		update(l, r, 0, arr_size-1, 0, value);
 	}
 
-	void update(int l, int r, int loc, int pos, T value){
+	void update(int loc, T value){
+		update(loc, loc, 0, arr_size-1, 0, value);
+	}
+
+	void update(int ul, int ur, int l, int r, int pos, T value){
+		
+		if(l > r)
+			return;
+
+		if(lazy[pos]){
+			
+			seg[pos] = fun(seg[pos], update_seg[pos]);
+			lazy[pos] = 0;
+
+			if(l != r){
+				lazy[left(pos)] = 1;
+				lazy[right(pos)] = 1;
+				update_seg[left(pos)] = update_fun(update_seg[pos], value);
+				update_seg[right(pos)] = update_fun(update_seg[pos], value);
+			}
+
+		}
+
 		if(l == r){
 			seg[pos] = value;
 			return; 
