@@ -201,49 +201,49 @@ public:
 
 /*
 
-------------------------------------------------------------------------------
-
-#include <iostream>	
-#include <algorithm>
-#include "lazySegmentTree.cpp"
-
-using namespace std;
-
-inline int min_fun(int a, int b){
-	return min(a, b);
-}
-
-inline int sum(int a, int b){
-	return a + b;
-}
-
-int main(){
-
-	std::vector<int> a = {-1, 4, 1, 0};
-	LazySegmentTree <int> seg(int(a.size()), min_fun, sum, 1000, 0);
-
-	seg.build(a);
-
-	seg.print();
-	cout << seg.query(0, 3) << "\n";
-
-	seg.update(0, 1, 1);
-
-	cout << seg.query(0, 3) << "\n";
-
-	seg.update(0, 3, 1);
-
-	cout << seg.query(0, 3) << "\n";
-
-	seg.update(2, 3, -3);
-
-	cout << seg.query(0, 3) << "\n";
-	
-
-	return 0;
-}
-
-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                                                                              |
+#include <iostream>                                                           |
+#include <algorithm>                                                          |
+#include "lazySegmentTree.cpp"                                                |
+                                                                              |
+using namespace std;                                                          |
+                                                                              |
+inline int min_fun(int a, int b){                                             |
+	return min(a, b);                                                         |
+}                                                                             |
+                                                                              |
+inline int sum(int a, int b){                                                 |
+	return a + b;                                                             |
+}                                                                             |
+                                                                              |
+int main(){                                                                   |
+                                                                              |
+	std::vector<int> a = {-1, 4, 1, 0};                                       |
+	LazySegmentTree <int> seg(int(a.size()), min_fun, sum, 1000, 0);          |
+                                                                              |
+	seg.build(a);                                                             |
+                                                                              |
+	seg.print();                                                              |
+	cout << seg.query(0, 3) << "\n";                                          |
+                                                                              |
+	seg.update(0, 1, 1);                                                      |
+                                                                              |
+	cout << seg.query(0, 3) << "\n";                                          |
+                                                                              |
+	seg.update(0, 3, 1);                                                      |
+                                                                              |
+	cout << seg.query(0, 3) << "\n";                                          |
+                                                                              |
+	seg.update(2, 3, -3);                                                     |
+                                                                              |
+	cout << seg.query(0, 3) << "\n";                                          |
+	                                                                          |
+                                                                              |
+	return 0;                                                                 |
+}                                                                             |
+                                                                              |
+-------------------------------------------------------------------------------
 Output:
 -1                                                                                                                              
 0                                                                                                                               
