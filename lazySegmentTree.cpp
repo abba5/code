@@ -3,8 +3,6 @@
 #include <functional>
 #include <bitset>
 
-using namespace std;
-
 template <class T>
 class LazySegmentTree{
 	
@@ -35,7 +33,7 @@ public:
 
 	LazySegmentTree(){}
 
-	LazySegmentTree(int size_of_array, std::function <T(T, T)> decide_fun, std::function <T(T, T)> update_fun, T default_return, T deault_lazy){
+	LazySegmentTree(std::function <T(T, T)> decide_fun, std::function <T(T, T)> update_fun, T default_return, T deault_lazy){
 
 		// size_of_array: size of array on which want to build tree
 		// fun: funtion min, max, addition etc
@@ -63,22 +61,32 @@ public:
 
 		*/
 
-
-		this -> arr_size = size_of_array;
-		seg.resize(4*arr_size + 5);
-		update_seg.resize(4*arr_size + 5);
-		lazy.reset();
-
 		this -> update_fun = update_fun;
 		this -> decide_fun = decide_fun;
 		this -> default_return = default_return;
 		this -> deault_lazy = deault_lazy;
 	}
 
+	LazySegmentTree(std::vector <int> &a, std::function <T(T, T)> decide_fun, std::function <T(T, T)> update_fun, T default_return, T deault_lazy){
+
+		this -> update_fun = update_fun;
+		this -> decide_fun = decide_fun;
+		this -> default_return = default_return;
+		this -> deault_lazy = deault_lazy;
+
+		build(a);
+
+	}
+
 	void build(std::vector<T> &a){
 
 		// it will build segment tree 
 
+		this -> arr_size = a.size();
+		seg.resize(4*arr_size + 5);
+		update_seg.resize(4*arr_size + 5);
+		lazy.reset();
+		
 		build(a, 0, arr_size-1, 0);
 	}
 
@@ -193,63 +201,8 @@ public:
 
 	void print(){
 		for(int i = 0; i < seg.size(); ++i)
-			cout << i  << " " << seg[i] << "\n";
+			std::cout << i  << " " << seg[i] << "\n";
 	}
 
 };
 
-
-/*
-
--------------------------------------------------------------------------------
-                                                                              |
-#include <iostream>                                                           |
-#include <algorithm>                                                          |
-#include "lazySegmentTree.cpp"                                                |
-                                                                              |
-using namespace std;                                                          |
-                                                                              |
-inline int min_fun(int a, int b){                                             |
-	return min(a, b);                                                         |
-}                                                                             |
-                                                                              |
-inline int sum(int a, int b){                                                 |
-	return a + b;                                                             |
-}                                                                             |
-                                                                              |
-int main(){                                                                   |
-                                                                              |
-	std::vector<int> a = {-1, 4, 1, 0};                                       |
-	LazySegmentTree <int> seg(int(a.size()), min_fun, sum, 1000, 0);          |
-                                                                              |
-	seg.build(a);                                                             |
-                                                                              |
-	seg.print();                                                              |
-	cout << seg.query(0, 3) << "\n";                                          |
-                                                                              |
-	seg.update(0, 1, 1);                                                      |
-                                                                              |
-	cout << seg.query(0, 3) << "\n";                                          |
-                                                                              |
-	seg.update(0, 3, 1);                                                      |
-                                                                              |
-	cout << seg.query(0, 3) << "\n";                                          |
-                                                                              |
-	seg.update(2, 3, -3);                                                     |
-                                                                              |
-	cout << seg.query(0, 3) << "\n";                                          |
-	                                                                          |
-                                                                              |
-	return 0;                                                                 |
-}                                                                             |
-                                                                              |
--------------------------------------------------------------------------------
-
-Output:
--1                                                                                                                              
-0                                                                                                                               
-1                                                                                                                               
--2   
-
-
-*/

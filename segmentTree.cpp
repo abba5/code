@@ -33,7 +33,7 @@ public:
 
 	SegmentTree(){}
 
-	SegmentTree(int size_of_array, std::function <T(T, T)> fun, T default_return){
+	SegmentTree(std::function <T(T, T)> fun, T default_return){
 
 		// size_of_array: size of array on which want to build tree
 		// fun: funtion min, max, addition etc
@@ -55,17 +55,24 @@ public:
 
 		*/
 
+		this -> fun = fun;
+		this -> default_return = default_return;
+	}
 
-		this -> arr_size = size_of_array;
-		seg.resize(4*arr_size + 5);
+	SegmentTree(vector <T> &a, std::function <T(T, T)> fun, T default_return){
 
 		this -> fun = fun;
 		this -> default_return = default_return;
+
+		build(a);
 	}
 
 	void build(std::vector<T> &a){
 
 		// it will build segment tree 
+
+		this -> arr_size = a.size();
+		seg.resize(4*arr_size + 5);
 
 		build(a, 0, arr_size-1, 0);
 	}
@@ -126,7 +133,7 @@ public:
 
 	void print(){
 		for(int i = 0; i < seg.size(); ++i)
-			cout << i  << " " << seg[i] << "\n";
+			std::cout << i  << " " << seg[i] << "\n";
 	}
 
 };
