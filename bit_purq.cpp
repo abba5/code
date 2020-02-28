@@ -19,20 +19,21 @@ class BIT_PURQ{
 	std::function <int(int)> decrement_fun;
 
 	std::function <T(T, T)> decide_fun;
+	std::function <T(T, T)> inv_decide_fun;
 
-	inline int one_base_index_increment(int x){
+	static int one_base_index_increment(int x){
 		return (x + (x & (-x)));
 	}
 
-	inline int one_base_index_decrement(int x){
+	static int one_base_index_decrement(int x){
 		return (x - (x & (-x)));
 	}
 
-	inline int zero_base_index_increment(int x){
+	static int zero_base_index_increment(int x){
 		return x | (x + 1);
 	}
 
-	inline int zero_base_index_decrement(int x){
+	static int zero_base_index_decrement(int x){
 		return (x & (x + 1)) - 1;
 	}
 
@@ -40,11 +41,15 @@ public:
 
 	BIT_PURQ(){}
 
-	BIT_PURQ(int size_of_bit, T defualt_value, std::function <T(T, T)> decide_fun, int base = 0){
+	BIT_PURQ(int size_of_bit, T defualt_value, std::function <T(T, T)> decide_fun, std::function <T(T, T)> inv_decide_fun,int base = 0){
 
 		this -> arr_size = size_of_bit;
 		bit.resize(size_of_bit, defualt_value);
+		
 		this -> decide_fun = decide_fun;
+		this -> inv_decide_fun = inv_decide_fun;
+		
+		this -> default_ans = defualt_value;
 
 		if(base){
 			increment_fun = one_base_index_increment;
@@ -61,10 +66,29 @@ public:
 	}
 
 	void update(int x, T value){
-		while(x < arr_size){
+		while(x < max_limit){
 			bit[x] = decide_fun(bit[x], value);
 			x = increment_fun(x);
 		}
 	}
 
-}
+	T find(int x){
+		T res = default_ans;
+		while(x > min_limit){
+			res = decide_fun(bit[x], res);
+			x = decrement_fun(x);
+		}
+		return res;
+	}
+
+	T find(int l, int r){
+		return inv_decide_fun(find(r), find(l-1));
+	}
+
+	void print(){
+		for(T value: bit){
+			std::cout << value << " ";
+		}
+		std::cout << "\n";
+	}
+};
