@@ -25,9 +25,7 @@ public:
 		bit_add.update(l, value);
 		bit_add.update(r+1, -value);
 		bit_remove.update(l, (l-1)*value);
-		bit_remove.update(r+1, -(l-1)*value);
-		// because we want to add this value into ans
-		bit_remove.update(r+1, (-r+l-1)*value);
+		bit_remove.update(r+1, -(r)*value);
 	}
 
 	T query(int idx){

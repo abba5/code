@@ -72,7 +72,7 @@ public:
 		}
 	}
 
-	T find(int x){
+	T query(int x){
 		T res = default_ans;
 		while(x > min_limit){
 			res = decide_fun(bit[x], res);
@@ -81,8 +81,8 @@ public:
 		return res;
 	}
 
-	T find(int l, int r){
-		return inv_decide_fun(find(r), find(l-1));
+	T query(int l, int r){
+		return inv_decide_fun(query(r), query(l-1));
 	}
 
 	void print(){
