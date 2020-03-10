@@ -17,6 +17,8 @@
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
+#include <iomanip>
+
 
 using namespace std;
 
@@ -24,7 +26,8 @@ using namespace std;
 #define ALL(a) a.begin(), a.end()
 #define MP(a, b) make_pair(a, b)
 #define PB(a, b) push_back(a)
-#define boost ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0)
+#define boost ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0),cout << fixed << setprecision(10);
+#define ll long long int
 
 #define DEBUG
 
@@ -34,7 +37,7 @@ using namespace std;
 
     class Debugger{
         public:
-        Debugger(const std::string& _separator = " - ") :
+        Debugger(const std::string& _separator = " | ") :
         first(true), separator(_separator){}
 
         template<typename ObjectType> Debugger& operator , (const ObjectType& v)
