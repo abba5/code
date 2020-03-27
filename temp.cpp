@@ -18,6 +18,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
+#include <cstring>
 
 
 using namespace std;
@@ -25,7 +26,8 @@ using namespace std;
 #define MEM(a, b) memset(a, (b), sizeof(a))
 #define ALL(a) a.begin(), a.end()
 #define MP(a, b) make_pair(a, b)
-#define PB(a, b) push_back(a)
+#define PB(a) push_back(a)
+#define EB(a) emplace_back(a)
 #define boost ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0),cout << fixed << setprecision(10);
 #define ll long long int
 
@@ -62,7 +64,7 @@ using namespace std;
 
 
 void solve(){
-
+	
 }
 
 int main(){
@@ -71,7 +73,7 @@ int main(){
 	
 	int T;
 	
-	cin >> T;
+	// cin >> T;
 	T = 1;
 	
 	while(T--){
