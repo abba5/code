@@ -20,16 +20,25 @@
 #include <iomanip>
 #include <cstring>
 
+// ---------- PBDS -----------------
+
+#include <ext/pb_ds/assoc_container.hpp> // Common file
+#include <ext/pb_ds/tree_policy.hpp> // Including tree_order_statistics_node_update
+#include <ext/pb_ds/detail/standard_policies.hpp>
+// slow but fast ORZ :)
+// ----------------------------------
 
 using namespace std;
+using namespace __gnu_pbds; 
 
 #define MEM(a, b) memset(a, (b), sizeof(a))
 #define ALL(a) a.begin(), a.end()
 #define MP(a, b) make_pair(a, b)
 #define PB(a) push_back(a)
-#define EB(a) emplace_back(a)
+#define EB(a) emplace_back(a) // care when use
 #define boost ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0),cout << fixed << setprecision(10);
-#define ll long long int
+// #define ll long long int
+#define int long long int
 
 #define DEBUG
 
@@ -67,7 +76,7 @@ void solve(){
 	
 }
 
-int main(){
+unsigned main(){
 
 	boost;
 	
