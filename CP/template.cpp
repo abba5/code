@@ -42,16 +42,16 @@ using namespace __gnu_pbds;
 
 #define sim template < class c
 #define ris return * this
-#define dor > debug & operator <<
+#define dor > debuged & operator <<
 #define eni(x) sim > typename \
-  enable_if<sizeof dud<c>(0) x 1, debug&>::type operator<<(c i) {
+  enable_if<sizeof dud<c>(0) x 1, debuged&>::type operator<<(c i) {
 sim > struct rge { c b, e; };
 sim > rge<c> range(c i, c j) { return rge<c>{i, j}; }
 sim > auto dud(c* x) -> decltype(cerr << *x, 0);
 sim > char dud(...);
-struct debug {
+struct debuged {
 #ifdef LOCAL
-~debug() { cerr << endl; }
+~debuged() { cerr << endl; }
 eni(!=) cerr << boolalpha << i; ris; }
 eni(==) ris << range(begin(i), end(i)); }
 sim, class b dor(pair < b, c > d) {
@@ -68,12 +68,12 @@ sim dor(const c&) { ris; }
 #endif
 };
 #define imie(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
-// debug & operator << (debug & dd, P p) { dd << "(" << p.x << ", " << p.y << ")"; return dd; }
-#define deb(x) debug() << imie(x)
+// debuged & operator << (debuged & dd, P p) { dd << "(" << p.x << ", " << p.y << ")"; return dd; }
 
+#define debug(x) debuged() << imie(x)
 
 void solve(){
-	
+    
 }
 
 int32_t main(){
@@ -82,8 +82,8 @@ int32_t main(){
 
 	int T;
 	
-	cin >> T;
-	// T = 1;
+	//cin >> T;
+	 T = 1;
 	
 	for(int i = 1; i <= T; ++i){
 		solve();
