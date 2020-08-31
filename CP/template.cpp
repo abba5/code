@@ -51,7 +51,7 @@ sim > auto dud(c* x) -> decltype(cerr << *x, 0);
 sim > char dud(...);
 struct debuged {
 #ifdef LOCAL
-~debuged() { cerr << endl; }
+~debuged() { }
 eni(!=) cerr << boolalpha << i; ris; }
 eni(==) ris << range(begin(i), end(i)); }
 sim, class b dor(pair < b, c > d) {
@@ -67,10 +67,10 @@ sim dor(rge<c> d) {
 sim dor(const c&) { ris; }
 #endif
 };
-#define imie(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
+#define imie(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] \n"
 // debuged & operator << (debuged & dd, P p) { dd << "(" << p.x << ", " << p.y << ")"; return dd; }
 
-#define debug(x) debuged() << imie(x)
+#define debug debuged()
 
 void solve(){
     
@@ -87,7 +87,7 @@ int32_t main(){
 	
 	for(int i = 1; i <= T; ++i){
 		solve();
-		cout << "\n";
+		// cout << "\n";
 	}
 
 	return 0;
