@@ -37,8 +37,8 @@ using namespace __gnu_pbds;
 #define PB(a) push_back(a)
 #define EB(a) emplace_back(a) 
 #define boost ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0),cout << fixed << setprecision(10);
-// #define ll long long int
-#define int long long int
+#define ll long long int
+// #define int long long int
 
 #define sim template < class c
 #define ris return * this
