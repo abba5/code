@@ -82,8 +82,8 @@ int32_t main(){
 
 	int T;
 	
-	//cin >> T;
-	 T = 1;
+	// cin >> T;
+	T = 1;
 	
 	for(int i = 1; i <= T; ++i){
 		solve();
