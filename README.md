@@ -1,5 +1,4 @@
-# code
-## competitive programming codes in C++
+## Competitive Programming Codes in C++ Language
 
 ### Programming setup
 #### Geany Editor
