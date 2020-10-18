@@ -33,9 +33,6 @@ using namespace __gnu_pbds;
 
 #define MEM(a, b) memset(a, (b), sizeof(a))
 #define ALL(a) a.begin(), a.end()
-#define MP(a, b) make_pair(a, b)
-#define PB(a) push_back(a)
-#define EB(a) emplace_back(a) 
 #define boost ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0),cout << fixed << setprecision(10);
 #define ll long long int
 // #define int long long int
@@ -67,13 +64,20 @@ sim dor(rge<c> d) {
 sim dor(const c&) { ris; }
 #endif
 };
-#define imie(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
+#define imie(...) (__VA_ARGS__)
 // debuged & operator << (debuged & dd, P p) { dd << "(" << p.x << ", " << p.y << ")"; return dd; }
 
-#define debug debuged()
+#define debug(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
+
+void err(istream_iterator<string> it) {}
+template<typename T, typename... Args>
+void err(istream_iterator<string> it, T a, Args... args) {
+	debuged() << *it << ": " << imie(a);
+	err(++it, args...);
+}
 
 void solve(){
-    
+
 }
 
 int32_t main(){
@@ -89,7 +93,6 @@ int32_t main(){
 		solve();
 		// cout << "\n";
 	}
-
 	return 0;
 }
 
