@@ -20,22 +20,11 @@
 #include <iomanip>
 #include <cstring>
 
-// ---------- PBDS -----------------
-
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp> 
-#include <ext/pb_ds/detail/standard_policies.hpp>
-
-// ----------------------------------
-
-using namespace std;
-using namespace __gnu_pbds; 
+using namespace std; 
 
 #define MEM(a, b) memset(a, (b), sizeof(a))
 #define ALL(a) a.begin(), a.end()
 #define boost ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0),cout << fixed << setprecision(10);
-#define ll long long int
-// #define int long long int
 
 #define sim template < class c
 #define ris return * this
@@ -76,6 +65,8 @@ void err(istream_iterator<string> it, T a, Args... args) {
 	err(++it, args...);
 }
 
+using ll = long long int;
+
 void solve(){
 
 }
@@ -95,4 +86,3 @@ int32_t main(){
 	}
 	return 0;
 }
-
