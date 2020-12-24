@@ -22,13 +22,20 @@
 **Don't change gnome terminal setting some time you will need that.**
 
 4. Install zsh-autosuggestions
-> git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
- gedit ~/.zshrc \
-   * _Add the plugin to the list of plugins_
-> plugins=(\
-&nbsp;&nbsp;&nbsp;&nbsp;git\
-&nbsp;&nbsp;&nbsp;&nbsp;zsh-autosuggestions\
+```
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+gedit ~/.zshrc
+```
+* _Add the plugin to the list of plugins_
+```
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
+```
 * source zshrc file
 > source ~/.zshrc
 
