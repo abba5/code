@@ -68,7 +68,7 @@ void err(istream_iterator<string> it, T a, Args... args) {
 using ll = long long int;
 
 void solve(){
-
+	cout << "Hello world";
 }
 
 int32_t main(){
