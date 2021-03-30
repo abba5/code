@@ -69,6 +69,7 @@ using ll = long long int;
 
 void solve(){
 	cout << "Hello world";
+	cout << "Solve\n";
 }
 
 int32_t main(){
