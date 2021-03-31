@@ -21,3 +21,4 @@ ifdef f
 else
 	@./a.out < in
 endif
+	@echo
